@@ -1,0 +1,146 @@
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { z } from 'zod';
+import { X } from 'lucide-react';
+
+export const expenseSchema = z.object({
+  amount: z.number().min(0.01, 'Amount must be greater than 0'),
+  category: z.enum(['housing', 'food', 'transportation', 'education', 'entertainment', 'shopping', 'health', 'other']),
+  description: z.string().min(3, 'Description must be at least 3 characters'),
+  date: z.string(),
+  essential: z.boolean(),
+});
+
+export type ExpenseFormData = z.infer<typeof expenseSchema>;
+
+interface AddExpenseFormProps {
+  onClose: () => void;
+  onSubmit: (data: ExpenseFormData) => void;
+}
+
+const AddExpenseForm: React.FC<AddExpenseFormProps> = ({ onClose, onSubmit }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<ExpenseFormData>({
+    resolver: zodResolver(expenseSchema),
+    defaultValues: {
+      date: new Date().toISOString().split('T')[0],
+      essential: false,
+    },
+  });
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="relative w-full max-w-md rounded-lg bg-white p-6 shadow-xl dark:bg-gray-800">
+        <button
+          onClick={onClose}
+          className="absolute right-4 top-4 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        
+        <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
+          Add New Expense
+        </h2>
+        
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div>
+            <label className="label" htmlFor="amount">
+              Amount
+            </label>
+            <input
+              type="number"
+              step="0.01"
+              className="input w-full"
+              {...register('amount', { valueAsNumber: true })}
+            />
+            {errors.amount && (
+              <p className="mt-1 text-sm text-danger-500">{errors.amount.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label" htmlFor="category">
+              Category
+            </label>
+            <select className="select w-full" {...register('category')}>
+              <option value="housing">Housing</option>
+              <option value="food">Food</option>
+              <option value="transportation">Transportation</option>
+              <option value="education">Education</option>
+              <option value="entertainment">Entertainment</option>
+              <option value="shopping">Shopping</option>
+              <option value="health">Health</option>
+              <option value="other">Other</option>
+            </select>
+            {errors.category && (
+              <p className="mt-1 text-sm text-danger-500">{errors.category.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label" htmlFor="description">
+              Description
+            </label>
+            <input
+              type="text"
+              className="input w-full"
+              {...register('description')}
+            />
+            {errors.description && (
+              <p className="mt-1 text-sm text-danger-500">{errors.description.message}</p>
+            )}
+          </div>
+
+          <div>
+            <label className="label" htmlFor="date">
+              Date
+            </label>
+            <input
+              type="date"
+              className="input w-full"
+              {...register('date')}
+            />
+            {errors.date && (
+              <p className="mt-1 text-sm text-danger-500">{errors.date.message}</p>
+            )}
+          </div>
+
+          <div className="flex items-center space-x-2">
+            <input
+              type="checkbox"
+              className="h-4 w-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+              {...register('essential')}
+            />
+            <label className="text-sm text-gray-700 dark:text-gray-300">
+              Essential Expense
+            </label>
+          </div>
+
+          <div className="flex justify-end space-x-3 pt-4">
+            <button
+              type="button"
+              onClick={onClose}
+              className="btn btn-secondary"
+              disabled={isSubmitting}
+            >
+              Cancel
+            </button>
+            <button 
+              type="submit" 
+              className="btn btn-primary"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Adding...' : 'Add Expense'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default AddExpenseForm;
