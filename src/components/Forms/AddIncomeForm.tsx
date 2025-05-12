@@ -47,13 +47,13 @@ const AddIncomeForm: React.FC<AddIncomeFormProps> = ({ onClose, onSubmit }) => {
         </button>
         
         <h2 className="mb-4 text-xl font-semibold text-gray-900 dark:text-white">
-          Add New Income
+          Añadir Ingreso
         </h2>
         
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="label" htmlFor="amount">
-              Amount
+              Cantidad
             </label>
             <input
               type="number"
@@ -68,13 +68,13 @@ const AddIncomeForm: React.FC<AddIncomeFormProps> = ({ onClose, onSubmit }) => {
 
           <div>
             <label className="label" htmlFor="source">
-              Source
+              Fuente
             </label>
             <select className="select w-full" {...register('source')}>
-              <option value="scholarship">Scholarship</option>
-              <option value="family">Family Support</option>
-              <option value="job">Part-time Job</option>
-              <option value="other">Other</option>
+              <option value="scholarship">Ingresos Educativos</option>
+              <option value="family">Familiares</option>
+              <option value="job">trabajo</option>
+              <option value="other">otro</option>
             </select>
             {errors.source && (
               <p className="mt-1 text-sm text-danger-500">{errors.source.message}</p>
@@ -83,7 +83,7 @@ const AddIncomeForm: React.FC<AddIncomeFormProps> = ({ onClose, onSubmit }) => {
 
           <div>
             <label className="label" htmlFor="description">
-              Description
+            Descripcion
             </label>
             <input
               type="text"
@@ -97,7 +97,7 @@ const AddIncomeForm: React.FC<AddIncomeFormProps> = ({ onClose, onSubmit }) => {
 
           <div>
             <label className="label" htmlFor="date">
-              Date
+              Fecha
             </label>
             <input
               type="date"
@@ -116,22 +116,22 @@ const AddIncomeForm: React.FC<AddIncomeFormProps> = ({ onClose, onSubmit }) => {
               {...register('recurring')}
             />
             <label className="text-sm text-gray-700 dark:text-gray-300">
-              Recurring Income
+              Ingreso recurrente
             </label>
           </div>
 
           {isRecurring && (
             <div>
               <label className="label" htmlFor="recurringPeriod">
-                Recurring Period
+                Periodo Recurrente
               </label>
               <select
                 className="select w-full"
                 {...register('recurringPeriod')}
               >
-                <option value="weekly">Weekly</option>
-                <option value="biweekly">Bi-weekly</option>
-                <option value="monthly">Monthly</option>
+                <option value="weekly">Semanal</option>
+                <option value="biweekly">Quincenal</option>
+                <option value="monthly">Mensual</option>
               </select>
               {errors.recurringPeriod && (
                 <p className="mt-1 text-sm text-danger-500">
@@ -148,14 +148,14 @@ const AddIncomeForm: React.FC<AddIncomeFormProps> = ({ onClose, onSubmit }) => {
               className="btn btn-secondary"
               disabled={isSubmitting}
             >
-              Cancel
+              Cancelar
             </button>
             <button 
               type="submit" 
               className="btn btn-primary"
               disabled={isSubmitting}
             >
-              {isSubmitting ? 'Adding...' : 'Add Income'}
+              {isSubmitting ? 'Adding...' : 'Añadir Ingreso'}
             </button>
           </div>
         </form>

@@ -24,6 +24,7 @@ export interface Expense {
   date: string;
   description: string;
   essential: boolean;
+  income_source_id?: string; // Es opcional porque no todos los gastos quizás vengan de una fuente específica
 }
 
 export type ExpenseCategory = 

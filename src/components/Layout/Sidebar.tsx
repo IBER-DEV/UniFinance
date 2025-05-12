@@ -22,12 +22,12 @@ const Sidebar: React.FC<SidebarProps> = ({ currentPath }) => {
   
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: Home },
-    { name: 'Income', href: '/income', icon: ArrowDownToLine },
-    { name: 'Expenses', href: '/expenses', icon: ArrowUpFromLine },
-    { name: 'Savings', href: '/savings', icon: PiggyBank },
-    { name: 'Reports', href: '/reports', icon: BarChart3 },
-    { name: 'Alerts', href: '/alerts', icon: BellRing },
-    { name: 'Calendar', href: '/calendar', icon: CalendarClock },
+    { name: 'Ingresos', href: '/income', icon: ArrowDownToLine },
+    { name: 'Gastos', href: '/expenses', icon: ArrowUpFromLine },
+    { name: 'Ahorro', href: '/savings', icon: PiggyBank },
+    { name: 'Reportes', href: '/reports', icon: BarChart3 },
+    { name: 'Alerta', href: '/alerts', icon: BellRing },
+    { name: 'Calendario', href: '/calendar', icon: CalendarClock },
     { name: 'Tips', href: '/tips', icon: Lightbulb },
   ];
 

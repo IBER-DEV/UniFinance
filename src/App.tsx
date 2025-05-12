@@ -8,6 +8,7 @@ import AuthForm from './components/Auth/AuthForm';
 import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
+import Reports from './pages/Reports';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ const router = createBrowserRouter([
       { path: 'income', element: <Income /> },
       { path: 'expenses', element: <Expenses /> },
       { path: 'savings', element: <Savings /> },
+      {path: 'reports', element: <Reports/>,},
     ],
   },
 ]);

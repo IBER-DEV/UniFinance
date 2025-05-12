@@ -24,7 +24,7 @@ const AlertsCard: React.FC = () => {
   return (
     <div className="card h-full">
       <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white">
-        Alerts & Reminders
+      Alertas y recordatorios
       </h3>
       {mockAlerts.length > 0 ? (
         <div className="space-y-3">
@@ -55,7 +55,7 @@ const AlertsCard: React.FC = () => {
       ) : (
         <div className="rounded-lg border border-gray-200 p-4 text-center dark:border-gray-700">
           <Bell className="mx-auto mb-2 h-8 w-8 text-gray-400" />
-          <p className="text-gray-500 dark:text-gray-400">No alerts at the moment</p>
+          <p className="text-gray-500 dark:text-gray-400">Sin alertas por el momento</p>
         </div>
       )}
     </div>

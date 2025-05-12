@@ -91,10 +91,10 @@ const RecentTransactions: React.FC = () => {
         <div className="mb-6 flex items-center justify-between">
           <div>
             <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-              Recent Transactions
+              Transacciones recientes
             </h3>
             <p className="mt-1 text-sm text-gray-600 dark:text-gray-400">
-              Current Balance:
+              Saldo actual:
               <span className={`ml-2 font-semibold ${currentBalance >= 0
                   ? 'text-secondary-600 dark:text-secondary-400'
                   : 'text-danger-600 dark:text-danger-400'
@@ -109,14 +109,14 @@ const RecentTransactions: React.FC = () => {
               className="btn btn-danger w-full sm:w-auto"
             >
               <MinusCircle className="mr-1 h-4 w-4" />
-              Add Expense
+              Add Gasto
             </button>
             <button
               onClick={() => setShowAddIncome(true)}
               className="btn btn-secondary w-full sm:w-auto"
             >
               <Plus className="mr-1 h-4 w-4" />
-              Add Income
+              Add Ingreso
             </button>
           </div>
 

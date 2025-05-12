@@ -55,10 +55,10 @@ const Savings: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">
-            Savings Goals
+            Metas de Ahorro
           </h1>
           <p className="mt-1 text-gray-600 dark:text-gray-400">
-            Track and manage your savings goals
+          Realice un seguimiento y administre sus objetivos de ahorro
           </p>
         </div>
         <button
@@ -66,14 +66,14 @@ const Savings: React.FC = () => {
           className="btn btn-primary"
         >
           <Plus className="mr-2 h-4 w-4" />
-          Add Goal
+          Añadir Meta de Ahorro
         </button>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div className="card">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Savings</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Ahorros Totales</h3>
             <div className="rounded-full bg-secondary-100 p-2 text-secondary-600 dark:bg-secondary-900 dark:text-secondary-300">
               <PiggyBank className="h-5 w-5" />
             </div>
@@ -82,13 +82,13 @@ const Savings: React.FC = () => {
             ${totalSavings.toFixed(2)}
           </p>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Current savings balance
+            Saldo total después de gastos
           </p>
         </div>
 
         <div className="card">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Savings Rate</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Tasa de ahorro</h3>
             <div className="rounded-full bg-primary-100 p-2 text-primary-600 dark:bg-primary-900 dark:text-primary-300">
               <TrendingUp className="h-5 w-5" />
             </div>
@@ -97,13 +97,13 @@ const Savings: React.FC = () => {
             {savingsRate.toFixed(1)}%
           </p>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Of total income
+            De ingresos totales
           </p>
         </div>
 
         <div className="card">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Active Goals</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Objetivos activos</h3>
             <div className="rounded-full bg-warning-100 p-2 text-warning-600 dark:bg-warning-900 dark:text-warning-300">
               <Target className="h-5 w-5" />
             </div>
@@ -112,7 +112,7 @@ const Savings: React.FC = () => {
             {goals.length}
           </p>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Current savings goals
+          Objetivos de ahorro actuales
           </p>
         </div>
       </div>

@@ -72,24 +72,24 @@ const BudgetProgressCard: React.FC = () => {
   return (
     <div className="card">
       <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white">
-        Budget Overview
+      Resumen del presupuesto
       </h3>
 
       <div className="mb-4 grid grid-cols-1 gap-4 sm:grid-cols-3 text-center">
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Income</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Ingresos</p>
           <p className="text-xl font-semibold text-gray-800 dark:text-white">
             ${totalIncome.toFixed(2)}
           </p>
         </div>
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Expenses</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Gastos</p>
           <p className="text-xl font-semibold text-danger-600 dark:text-danger-400">
             ${totalExpenses.toFixed(2)}
           </p>
         </div>
         <div>
-          <p className="text-sm text-gray-500 dark:text-gray-400">Savings</p>
+          <p className="text-sm text-gray-500 dark:text-gray-400">Ahorros</p>
           <p className="text-xl font-semibold text-secondary-600 dark:text-secondary-400">
             ${currentSavings.toFixed(2)}
           </p>
@@ -99,7 +99,7 @@ const BudgetProgressCard: React.FC = () => {
       {/* Editable Savings Goal */}
       <div className="mb-6">
         <div className="flex items-center justify-between mb-2">
-          <p className="text-sm font-medium">Savings Goal Progress</p>
+          <p className="text-sm font-medium">Progreso de la meta de ahorro</p>
           <p className="text-sm font-medium">
             ${currentSavings.toFixed(2)} of ${savingsGoal.toFixed(2)}
           </p>
@@ -107,7 +107,7 @@ const BudgetProgressCard: React.FC = () => {
 
         <div className="mb-4">
           <label className="text-xs text-gray-500 dark:text-gray-400 mb-1 block">
-            Adjust Savings Goal: {Math.round(savingsGoalMultiplier * 100)}%
+          Ajustar Meta de Ahorro: {Math.round(savingsGoalMultiplier * 100)}%
           </label>
           <input
             type="range"

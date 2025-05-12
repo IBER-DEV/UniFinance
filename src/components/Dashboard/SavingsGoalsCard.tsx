@@ -34,12 +34,12 @@ const SavingsGoalsCard: React.FC = () => {
   return (
     <div className="card h-full">
       <div className="mb-4 flex items-center justify-between">
-        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Savings Goals</h3>
+        <h3 className="text-lg font-semibold text-gray-800 dark:text-white">Metas de Ahorro</h3>
         <Link 
           to="/savings"
           className="text-sm font-medium text-primary-600 hover:text-primary-700 dark:text-primary-400 dark:hover:text-primary-300"
         >
-          View All
+          Ver Todas
         </Link>
       </div>
       {goals.length > 0 ? (

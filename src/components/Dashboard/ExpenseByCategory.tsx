@@ -40,7 +40,7 @@ const ExpenseByCategory: React.FC = () => {
   return (
     <div className="card h-full">
       <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white">
-        Expenses by Category
+        Gastos por categoría
       </h3>
       <div className="space-y-3">
         {expensesByCategory.map(({ category, amount, percentage }) => (

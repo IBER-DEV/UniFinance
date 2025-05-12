@@ -13,6 +13,7 @@ import BudgetProgressCard from '../components/Dashboard/BudgetProgressCard';
 import SavingsGoalsCard from '../components/Dashboard/SavingsGoalsCard';
 import AlertsCard from '../components/Dashboard/AlertsCard';
 import FinancialTipsCard from '../components/Dashboard/FinancialTipsCard';
+import IncomeSourceSummary from '../components/Dashboard/IncomeSourceSummary';
 
 const Dashboard: React.FC = () => {
   const { transactions } = useTransactionStore();
@@ -53,28 +54,29 @@ const Dashboard: React.FC = () => {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         <OverviewCard
-          title="Total Income"
-          value={`$${overview.totalIncome}`}
+          title="Ingresos Totales"
+          value={overview.totalIncome}
           icon={<DollarSign className="h-5 w-5 text-primary-500" />}
           change={5}
           trend="up"
         />
         <OverviewCard
-          title="Total Expenses"
-          value={`$${overview.totalExpenses}`}
+          title="Gastos Totales"
+          value={overview.totalExpenses}
           icon={<ShoppingCart className="h-5 w-5 text-danger-500" />}
           change={3}
           trend="down"
         />
         <OverviewCard
-          title="Savings"
-          value={`$${overview.savingsAmount}`}
+          title="Ahorros Totales"
+          prefix="$"
+          value={overview.savingsAmount}
           icon={<PiggyBank className="h-5 w-5 text-secondary-500" />}
           change={12}
           trend="up"
         />
         <OverviewCard
-          title="Savings Rate"
+          title="Porcentaje de Ahorros"
           value={overview.savingsPercentage}
           icon={<Wallet className="h-5 w-5 text-warning-500" />}
           prefix=""
@@ -93,11 +95,13 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <IncomeSourceSummary />
+        <ExpenseByCategory />
+      </div>
+
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
-        <div>
-          <ExpenseByCategory />
-        </div>
-        <div>
+        <div className="lg:col-span-2">
           <RecentTransactions />
         </div>
         <div>

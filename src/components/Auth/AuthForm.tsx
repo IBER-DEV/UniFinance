@@ -55,7 +55,7 @@ const AuthForm: React.FC = () => {
       <div className="w-full max-w-md space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900 dark:text-white">
-            {mode === 'signin' ? 'Sign in to your account' : 'Create your account'}
+            {mode === 'signin' ? 'Inicia sesión en tu cuenta' : 'Crea una cuenta'}
           </h2>
         </div>
 
@@ -131,8 +131,8 @@ const AuthForm: React.FC = () => {
               className="text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300"
             >
               {mode === 'signin'
-                ? "Don't have an account? Sign up"
-                : 'Already have an account? Sign in'}
+                ? "No tienes una cuenta? Crea una cuenta"
+                : 'Ya tienes na cuenta? Inicia sesión'}
             </button>
           </div>
         </form>

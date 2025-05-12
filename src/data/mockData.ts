@@ -169,40 +169,40 @@ export const mockAlerts: Alert[] = [
 // Mock Financial Tips
 export const mockFinancialTips: FinancialTip[] = [
   {
-    id: '1',
-    title: 'Use Student Discounts',
-    content: 'Always ask about student discounts when shopping. Many places offer 10-15% off with a valid student ID.',
-    category: 'saving',
-    difficulty: 'beginner',
+    id: "1",
+    title: "Aprovecha los Descuentos para Estudiantes",
+    content: "Siempre pregunta si ofrecen descuentos para estudiantes cuando vayas de compras. Muchos lugares tienen ofertas del 10-15% con una identificación de estudiante válida. ¡No pierdas la oportunidad de ahorrar!",
+    category: "saving",
+    difficulty: "beginner"
   },
   {
-    id: '2',
-    title: 'Cook in Bulk',
-    content: 'Prepare meals in bulk and freeze portions to save both money and time during busy school weeks.',
-    category: 'saving',
-    difficulty: 'beginner',
+    id: "2",
+    title: "Cocina en Cantidad y Congela",
+    content: "Prepara porciones grandes de comida y congélalas. Esto te ahorrará dinero y tiempo durante las semanas ocupadas de estudio o trabajo. ¡Comer en casa siempre es más económico!",
+    category: "saving",
+    difficulty: "beginner"
   },
   {
-    id: '3',
-    title: 'Use Library Resources',
-    content: 'Check if your university library offers free access to textbooks or digital resources before purchasing.',
-    category: 'saving',
-    difficulty: 'beginner',
+    id: "3",
+    title: "Utiliza los Recursos de la Biblioteca",
+    content: "Antes de comprar libros de texto o recursos digitales, revisa si la biblioteca de tu universidad o local ofrece acceso gratuito. ¡Puedes ahorrar mucho dinero evitando compras innecesarias!",
+    category: "saving",
+    difficulty: "beginner"
   },
   {
-    id: '4',
-    title: '50/30/20 Budget Rule',
-    content: 'Try the 50/30/20 rule: 50% for needs, 30% for wants, and 20% for savings or debt payment.',
-    category: 'budgeting',
-    difficulty: 'intermediate',
+    id: "4",
+    title: "La Regla del Presupuesto 50/30/20",
+    content: "Intenta la regla del 50/30/20: 50% de tus ingresos para necesidades básicas (alquiler, comida, transporte), 30% para deseos (ocio, salir a comer), y 20% para ahorros o pago de deudas. ¡Te ayudará a tener un mejor control de tu dinero!",
+    category: "budgeting",
+    difficulty: "intermediate"
   },
   {
-    id: '5',
-    title: 'Campus Side Hustles',
-    content: 'Look for flexible on-campus jobs like tutoring, research assistantships, or admin work that fit with your class schedule.',
-    category: 'earning',
-    difficulty: 'intermediate',
-  },
+    id: "5",
+    title: "Busca Trabajos a Tiempo Parcial en el Campus o Remotos Flexibles",
+    content: "Explora oportunidades de empleo a tiempo parcial en tu universidad (tutorías, asistente de investigación, trabajos administrativos) o trabajos remotos con horarios flexibles que se ajusten a tus clases o actividades. ¡Una fuente extra de ingresos siempre ayuda!",
+    category: "earning",
+    difficulty: "intermediate"
+  }
 ];
 
 // Get monthly overview data

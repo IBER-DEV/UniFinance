@@ -19,7 +19,7 @@ const FinancialTipsCard: React.FC = () => {
   return (
     <div className="card h-full">
       <h3 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white">
-        Financial Tips
+        Consejo Financiero
       </h3>
       <div className="relative flex h-full flex-col">
         <div className="flex items-center justify-center rounded-t-lg bg-primary-50 p-4 dark:bg-gray-700">

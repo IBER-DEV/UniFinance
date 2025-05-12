@@ -26,6 +26,7 @@ const Expenses: React.FC = () => {
       date: data.date,
       recurring: false,
       recurring_period: null,
+      income_source_id: data.income_source_id, // Add this line to include the income source
     });
     setShowAddExpense(false);
   };
@@ -35,10 +36,10 @@ const Expenses: React.FC = () => {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">
-            Expense Management
+          Gestión de Gastos
           </h1>
           <p className="mt-1 text-gray-600 dark:text-gray-400">
-            Track and manage your expenses
+          Rastree y administre sus Gastos
           </p>
         </div>
         <button
@@ -46,14 +47,14 @@ const Expenses: React.FC = () => {
           className="btn btn-danger"
         >
           <Plus className="mr-2 h-4 w-4" />
-          Add Expense
+          Añadir Gastos
         </button>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div className="card">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Total Expenses</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Gastos Totales</h3>
             <div className="rounded-full bg-danger-100 p-2 text-danger-600 dark:bg-danger-900 dark:text-danger-300">
               <DollarSign className="h-5 w-5" />
             </div>
@@ -62,13 +63,13 @@ const Expenses: React.FC = () => {
             ${totalExpenses.toFixed(2)}
           </p>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            All time expenses
+          Gastos de todo el tiempo
           </p>
         </div>
 
         <div className="card">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Essential Expenses</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Gastos Esenciales</h3>
             <div className="rounded-full bg-warning-100 p-2 text-warning-600 dark:bg-warning-900 dark:text-warning-300">
               <TrendingUp className="h-5 w-5" />
             </div>
@@ -77,13 +78,13 @@ const Expenses: React.FC = () => {
             ${essentialExpenses.toFixed(2)}
           </p>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Basic needs expenses
+          Gastos de necesidades básicas
           </p>
         </div>
 
         <div className="card">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Latest Expense</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Último gasto</h3>
             <div className="rounded-full bg-primary-100 p-2 text-primary-600 dark:bg-primary-900 dark:text-primary-300">
               <Calendar className="h-5 w-5" />
             </div>
@@ -92,14 +93,14 @@ const Expenses: React.FC = () => {
             ${latestExpense.toFixed(2)}
           </p>
           <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Most recent expense
+          Gasto más reciente
           </p>
         </div>
       </div>
 
       <div className="card">
         <h2 className="mb-4 text-lg font-semibold text-gray-800 dark:text-white">
-          Expense History
+        Historial de gastos
         </h2>
         {isLoading ? (
           <div className="flex items-center justify-center py-8">
