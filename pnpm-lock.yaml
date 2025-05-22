@@ -15,7 +15,7 @@ importers:
         specifier: ^2.39.7
         version: 2.49.4
       date-fns:
-        specifier: ^3.3.1
+        specifier: ^3.6.0
         version: 3.6.0
       lucide-react:
         specifier: ^0.344.0
