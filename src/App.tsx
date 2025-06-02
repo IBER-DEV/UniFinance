@@ -9,6 +9,7 @@ import { ThemeProvider } from './context/ThemeContext';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { createBrowserRouter, RouterProvider, Navigate } from 'react-router-dom';
 import Reports from './pages/Reports';
+import { Analytics } from '@vercel/analytics/react';
 
 const router = createBrowserRouter([
   {
@@ -27,11 +28,14 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <AuthProvider>
+    <><AuthProvider>
       <ThemeProvider>
         <AuthenticatedApp />
       </ThemeProvider>
     </AuthProvider>
+    <Analytics />
+    </>
+    
   );
 }
 
