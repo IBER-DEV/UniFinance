@@ -6,12 +6,23 @@ import { X } from 'lucide-react';
 import { useTransactionStore } from '../../store/transactionStore';
 
 export const expenseSchema = z.object({
-  amount: z.number().min(0.01, 'Amount must be greater than 0'),
-  category: z.enum(['housing', 'food', 'transportation', 'education', 'entertainment', 'shopping', 'health', 'other']),
-  description: z.string().min(3, 'Description must be at least 3 characters'),
+  amount: z.number().min(0.01, 'El importe debe ser mayor que 0'),
+  category: z.enum([
+    'housing',
+    'food',
+    'transportation',
+    'education',
+    'entertainment',
+    'shopping',
+    'health',
+    'other',
+  ], {
+    errorMap: () => ({ message: 'Seleccione una categoría' }),
+  }),
+  description: z.string().min(3, 'La descripción debe tener al menos 3 caracteres'),
   date: z.string(),
   essential: z.boolean(),
-  income_source_id: z.string().uuid('Please select an income source'),
+  income_source_id: z.string().uuid('Por favor seleccione una fuente de ingreso'),
 });
 
 export type ExpenseFormData = z.infer<typeof expenseSchema>;

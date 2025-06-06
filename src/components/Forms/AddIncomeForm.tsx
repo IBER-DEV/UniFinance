@@ -5,12 +5,16 @@ import { z } from 'zod';
 import { X } from 'lucide-react';
 
 export const incomeSchema = z.object({
-  amount: z.number().min(0.01, 'Amount must be greater than 0'),
-  source: z.enum(['scholarship', 'family', 'job', 'other']),
-  description: z.string().min(3, 'Description must be at least 3 characters'),
-  date: z.string(),
+  amount: z.number().min(0.01, 'La cantidad debe ser mayor que 0'),
+  source: z.enum(['scholarship', 'family', 'job', 'other'], {
+    required_error: 'Selecciona una fuente',
+  }),
+  description: z.string().min(3, 'La descripción debe tener al menos 3 caracteres'),
+  date: z.string({ required_error: 'La fecha es obligatoria' }),
   recurring: z.boolean(),
-  recurringPeriod: z.enum(['weekly', 'biweekly', 'monthly']).optional(),
+  recurringPeriod: z.enum(['weekly', 'biweekly', 'monthly'], {
+    required_error: 'Selecciona un periodo recurrente',
+  }).optional(),
 });
 
 export type IncomeFormData = z.infer<typeof incomeSchema>;
