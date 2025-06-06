@@ -34,6 +34,8 @@ const AddExpenseForm: React.FC<AddExpenseFormProps> = ({ onClose, onSubmit }) =>
     handleSubmit,
     formState: { errors, isSubmitting },
     watch,
+    setError,
+    clearErrors,
   } = useForm<ExpenseFormData>({
     resolver: zodResolver(expenseSchema),
     defaultValues: {
@@ -50,6 +52,28 @@ const AddExpenseForm: React.FC<AddExpenseFormProps> = ({ onClose, onSubmit }) =>
       .filter(t => t.type === 'expense' && t.income_source_id === selectedIncomeSourceId)
       .reduce((sum, t) => sum + Number(t.amount), 0)
     : 0;
+
+  const currentAmount = watch('amount');
+
+  useEffect(() => {
+    const amountValue = typeof currentAmount === 'number' ? currentAmount : undefined;
+
+    // Only set/clear our custom error if an income source is selected
+    if (selectedIncomeSourceId) {
+      if (typeof amountValue === 'number' && amountValue > 0 && amountValue > availableBalance) {
+        setError('amount', {
+          type: 'manual',
+          message: `Amount exceeds available balance of $${availableBalance.toFixed(2)}`,
+        });
+      } else if (errors.amount && errors.amount.message?.includes('exceeds available balance')) {
+        // Clear our custom error if the condition is no longer met or amount is not positive
+        clearErrors('amount');
+      }
+    } else if (errors.amount && errors.amount.message?.includes('exceeds available balance')){
+      // If no income source is selected, clear any existing 'exceeds balance' error for the amount
+      clearErrors('amount');
+    }
+  }, [currentAmount, availableBalance, selectedIncomeSourceId, setError, clearErrors, errors.amount]);
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
@@ -95,7 +119,7 @@ const AddExpenseForm: React.FC<AddExpenseFormProps> = ({ onClose, onSubmit }) =>
             <input
               type="number"
               step="0.01"
-              className="input w-full"
+              className={`input w-full ${errors.amount ? 'border-danger-500 focus:border-danger-500 focus:ring-danger-500' : ''}`}
               {...register('amount', { valueAsNumber: true })}
             />
             {errors.amount && (

@@ -61,6 +61,8 @@ export interface SavingsGoal {
   targetDate: string;
   category?: string;
   priority: 'low' | 'medium' | 'high';
+  contribution_amount?: number;
+  income_source_id?: string;
 }
 
 export interface Alert {

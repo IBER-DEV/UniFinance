@@ -9,6 +9,8 @@ export interface SavingsGoal {
   target_date: string;
   description: string;
   created_at?: string;
+  contribution_amount: number;
+  income_source_id?: string;
 }
 
 interface SavingsStore {

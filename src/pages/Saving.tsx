@@ -8,8 +8,11 @@ import type { SavingsGoalFormData } from '../components/Forms/AddSavingsGoalForm
 
 const Savings: React.FC = () => {
   const [showAddGoal, setShowAddGoal] = useState(false);
-  const { transactions } = useTransactionStore();
-  const { goals, isLoading, error, fetchGoals, addGoal, deleteGoal } = useSavingsStore();
+  const [showContributionForm, setShowContributionForm] = useState(false);
+  const [selectedGoal, setSelectedGoal] = useState<any | null>(null);
+
+  const { transactions, addTransaction } = useTransactionStore();
+  const { goals, isLoading, error, fetchGoals, addGoal, updateGoal, deleteGoal } = useSavingsStore();
 
   useEffect(() => {
     fetchGoals();
@@ -27,8 +30,60 @@ const Savings: React.FC = () => {
   const savingsRate = totalIncome > 0 ? (totalSavings / totalIncome) * 100 : 0;
 
   const handleAddGoal = async (data: SavingsGoalFormData) => {
-    await addGoal(data);
-    setShowAddGoal(false);
+    try {
+      if (data.income_source_id && data.contribution_amount) {
+        await addTransaction({
+          amount: data.contribution_amount,
+          type: 'expense',
+          category: 'savings',
+          description: `Contribution to savings goal: ${data.name}`,
+          date: new Date().toISOString().split('T')[0],
+          income_source_id: data.income_source_id,
+          recurring: false,
+        });
+
+        data.current_amount = (data.current_amount || 0) + data.contribution_amount;
+      }
+
+      await addGoal({
+        name: data.name,
+        target_amount: data.target_amount,
+        current_amount: data.current_amount,
+        target_date: data.target_date,
+        description: data.description,
+      });
+
+      setShowAddGoal(false);
+    } catch (error) {
+      console.error('Error creating savings goal:', error);
+    }
+  };
+
+  const handleUpdateGoal = async (goalId: string, data: SavingsGoalFormData) => {
+    try {
+      if (data.income_source_id && data.contribution_amount) {
+        await addTransaction({
+          amount: data.contribution_amount,
+          type: 'expense',
+          category: 'savings',
+          description: `Contribution to savings goal: ${data.name}`,
+          date: new Date().toISOString().split('T')[0],
+          income_source_id: data.income_source_id,
+          recurring: false,
+        });
+
+        const goal = goals.find(g => g.id === goalId);
+        if (goal) {
+          await updateGoal(goalId, {
+            current_amount: goal.current_amount + data.contribution_amount,
+          });
+        }
+      }
+      setShowContributionForm(false);
+      setSelectedGoal(null);
+    } catch (error) {
+      console.error('Error updating savings goal:', error);
+    }
   };
 
   const calculateProgress = (current: number, target: number) => {
@@ -42,38 +97,27 @@ const Savings: React.FC = () => {
     return 'bg-danger-500';
   };
 
-  if (error) {
-    return (
-      <div className="rounded-lg bg-danger-50 p-4 text-danger-700 dark:bg-danger-900 dark:text-danger-200">
-        Error loading savings goals: {error}
-      </div>
-    );
-  }
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-2xl font-bold text-gray-800 dark:text-white md:text-3xl">
-            Metas de Ahorro
+          Metas de ahorro
           </h1>
           <p className="mt-1 text-gray-600 dark:text-gray-400">
           Realice un seguimiento y administre sus objetivos de ahorro
           </p>
         </div>
-        <button
-          onClick={() => setShowAddGoal(true)}
-          className="btn btn-primary"
-        >
+        <button onClick={() => setShowAddGoal(true)} className="btn btn-primary">
           <Plus className="mr-2 h-4 w-4" />
-          Añadir Meta de Ahorro
+          Añadir meta
         </button>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <div className="card">
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Ahorros Totales</h3>
+            <h3 className="text-sm font-medium text-gray-500 dark:text-gray-400">Ahorro total</h3>
             <div className="rounded-full bg-secondary-100 p-2 text-secondary-600 dark:bg-secondary-900 dark:text-secondary-300">
               <PiggyBank className="h-5 w-5" />
             </div>
@@ -81,9 +125,7 @@ const Savings: React.FC = () => {
           <p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">
             ${totalSavings.toFixed(2)}
           </p>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            Saldo total después de gastos
-          </p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Saldo actual de ahorro</p>
         </div>
 
         <div className="card">
@@ -96,9 +138,7 @@ const Savings: React.FC = () => {
           <p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">
             {savingsRate.toFixed(1)}%
           </p>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-            De ingresos totales
-          </p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">De los ingresos totales</p>
         </div>
 
         <div className="card">
@@ -108,12 +148,8 @@ const Savings: React.FC = () => {
               <Target className="h-5 w-5" />
             </div>
           </div>
-          <p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">
-            {goals.length}
-          </p>
-          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
-          Objetivos de ahorro actuales
-          </p>
+          <p className="mt-2 text-3xl font-semibold text-gray-900 dark:text-white">{goals.length}</p>
+          <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Objetivos de ahorro actuales</p>
         </div>
       </div>
 
@@ -126,17 +162,13 @@ const Savings: React.FC = () => {
           {goals.map((goal) => {
             const progress = calculateProgress(goal.current_amount, goal.target_amount);
             const daysLeft = differenceInDays(new Date(goal.target_date), new Date());
-            
+
             return (
               <div key={goal.id} className="card">
                 <div className="mb-4 flex items-center justify-between">
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">
-                      {goal.name}
-                    </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
-                      {goal.description}
-                    </p>
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-white">{goal.name}</h3>
+                    <p className="text-sm text-gray-500 dark:text-gray-400">{goal.description}</p>
                   </div>
                   <div className="flex items-center space-x-4">
                     <div className="flex items-center text-sm text-gray-500 dark:text-gray-400">
@@ -154,7 +186,7 @@ const Savings: React.FC = () => {
 
                 <div className="mb-2 flex items-center justify-between text-sm">
                   <span className="font-medium text-gray-700 dark:text-gray-300">
-                    ${goal.current_amount.toFixed(2)} of ${goal.target_amount.toFixed(2)}
+                    ${goal.current_amount.toFixed(2)} de ${goal.target_amount.toFixed(2)}
                   </span>
                   <span className="font-medium text-gray-700 dark:text-gray-300">
                     {progress.toFixed(1)}%
@@ -169,10 +201,23 @@ const Savings: React.FC = () => {
                 </div>
 
                 <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400">
-                  <span>Target Date: {format(new Date(goal.target_date), 'MMM d, yyyy')}</span>
+                  <span>Fecha objetivo: {format(new Date(goal.target_date), 'MMM d, yyyy')}</span>
                   <span>
-                    Monthly Need: ${((goal.target_amount - goal.current_amount) / Math.max(daysLeft / 30, 1)).toFixed(2)}
+                   Necesidad mensual: $
+                    {((goal.target_amount - goal.current_amount) / Math.max(daysLeft / 30, 1)).toFixed(2)}
                   </span>
+                </div>
+
+                <div className="mt-4 flex justify-end">
+                  <button
+                    onClick={() => {
+                      setSelectedGoal(goal);
+                      setShowContributionForm(true);
+                    }}
+                    className="btn btn-secondary text-sm"
+                  >
+                    Añadir contribución
+                  </button>
                 </div>
               </div>
             );
@@ -184,6 +229,18 @@ const Savings: React.FC = () => {
         <AddSavingsGoalForm
           onClose={() => setShowAddGoal(false)}
           onSubmit={handleAddGoal}
+        />
+      )}
+
+      {showContributionForm && selectedGoal && (
+        <AddSavingsGoalForm
+          mode="update"
+          initialData={selectedGoal}
+          onClose={() => {
+            setShowContributionForm(false);
+            setSelectedGoal(null);
+          }}
+          onSubmit={(data) => handleUpdateGoal(selectedGoal.id, data)}
         />
       )}
     </div>
